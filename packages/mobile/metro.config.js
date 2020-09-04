@@ -21,10 +21,14 @@ module.exports = {
       {},
       {
         get: (target, name) => {
-          return path.join(__dirname, `node_modules/${name}`);
+          return path.join(process.cwd(), `node_modules/${name}`);
         },
       },
     ),
   },
-  watchFolders: [path.resolve(__dirname, '../')],
+  watchFolders: [
+    path.resolve(__dirname, '../'),
+    path.resolve(__dirname, '../../'),
+    path.resolve(__dirname, '../../node_modules'),
+  ],
 };
