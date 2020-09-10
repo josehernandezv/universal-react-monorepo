@@ -7,6 +7,11 @@
 
 const path = require('path');
 
+const reactNativePath = require.resolve('react-native');
+const reactNativeFolder = `${
+  reactNativePath.split('node_modules/react-native/')[0]
+}node_modules/react-native/`;
+
 module.exports = {
   transformer: {
     getTransformOptions: async () => ({
@@ -24,6 +29,12 @@ module.exports = {
           return path.join(process.cwd(), `node_modules/${name}`);
         },
       },
+    ),
+    blacklistRE: new RegExp(
+      `^((?!${reactNativeFolder.replace(
+        '/',
+        '\\/',
+      )}).)*\\/node_modules\\/react-native\\/.*$`,
     ),
   },
   watchFolders: [
